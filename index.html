@@ -107,6 +107,12 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+     @media (max-width: 500px) {
+  .vid iframe {
+    max-width: 100%;
+    aspect-ratio: 9/16;
+  }
+}
 
     /* Buttons container */
     .nav-container {
@@ -199,6 +205,8 @@
     <button class="nav-btn" onclick="showFirstPage()">Back</button>
     <button class="nav-btn next-btn" onclick="showthirdPage()">Next</button>
   </div>
+</div>
+  
    
 
  <div class="page" id="thirdPage">

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To my honey</title>
+   <style>
+    * { box-sizing: border-box; }
+
+    body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: linear-gradient(135deg, #ffe6f0, #ffccd5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+}
+
+.heart {
+  position: fixed; 
+  color: red;
+  font-size: 24px;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+   @keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }}
+
+    /* Login box */
+    .login-box {
+      background: #fff;
+      padding: 5%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 10; /* keep above hearts */
+    }
+    input[type="password"], button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+    }
+    button {
+      background: #ff4fa3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .message {
+      font-weight: bold;
+      color: red;
+      text-align: center;
+    }
+
+    /* Pages */
+    .page {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: auto;
+      padding: 5%;
+      z-index: 10; /* keep above hearts */
+    }
+
+    .letter {
+      background: #fffdf8;
+      width: 95%;
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      line-height: 1.6;
+      animation: fadeIn 2s ease;
+      font-size: 0.95rem;
+    }
+    p { color: #333; margin-bottom: 16px; }
+    .signature {
+      text-align: right;
+      font-style: italic;
+      color: #555;
+      margin-top: 30px;
+      font-family: "Cursive", serif;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Buttons container */
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+    .nav-btn {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      background: #ff4fa3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .nav-btn {
+  flex: 1;                 
+  padding: 8px 12px;       
+  font-size: 0.9rem;        
+  background: #ff4fa3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin: 0 5px;            
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;  
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+    
+  </style>
+
+</head>
+<body>
+
+  <!-- Login box -->
+  <div class="login-box" id="loginBox">
+    <h2 style="color: #ff4fa3;">What's the Password?</h2>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Enter</button>
+    <div class="message" id="message"></div>
+  </div>
+
+
+  <div class="page" id="loveSite">
+    <div class="letter">
+  <p>Dear Honey,</p>
+  
+  <p>Happy Birthday, honey ko! Thank you for loving me and for always making me feel special. 
+     Your love gives me strength and happiness every single day, and I feel so lucky to have you in my life.</p>
+  
+  <p>Even though we are far apart, you still brighten my days just by being you. 
+     I promise to keep loving you, supporting you, and standing by you no matter the distance or the challenges we face.</p>
+  
+  <p>On your special day, I just want you to know how much you mean to me. 
+     You are my joy, my comfort, and my greatest blessing. I’ll always be grateful for you and the love we share.</p>
+  
+  <p>Enjoy your birthday, honey. Celebrate it fully, because you deserve all the happiness in the world. 
+     Here’s to more birthdays, more memories, and more years of love together.</p>
+  
+  <p>I LOVE YOU VERY, VERY MUCH :3</p>
+  
+  <p class="signature">— Mike Justine</p>
+</div>
+
+    <div class="nav-container">
+      <button class="nav-btn next-btn" onclick="showSecondPage()">Next</button>
+    </div>
+  </div>
+
+
+ <div class="page" id="secondPage">
+    <div class="vid">
+      <video src="test/vid1.mp4" controls autoplay loop style="width:100%; height:100vh; object-fit:cover; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2);"></video>
+      
+</div>
+  <div class="nav-container">
+  <button class="nav-btn" onclick="showFirstPage()">Back</button>
+  <button class="nav-btn next-btn" onclick="showthirdPage()">Next</button>
+</div>
+</div>
+   
+
+ <div class="page" id="thirdPage">
+    <div class="letter">
+      <p>Ganda ng vid HAHAHA pinag isipak na permi ajay eh with all of my heart.
+        Madik amo ibagak hon pero Happy birthday po, masaya nak tatta HAHAHA isu dapat masaya ka din kasi it's your birthday baby 😘😏
+      </p>
+      <p>Tapos 3 days nalang first anniversary tan 🥹🥹 akalak idi baka haan ta tumagal kasi nag galas ugalik pero look at us tayo parin hanngang ngayon😍😍.
+        Thank you kasi uray pangit may pakpakitak kanyam na ugali ag sstay ka latta very thankful nak kin lord kasi inikan nak ti babae nga ag stay kanyak and tangap nak nu ana nak.
+        Isu haan ko kayat ag birok sabali kasi awan katulad mo walang katulad ba I'm so lucky to have you in my life uray agka layo ta i'm willing to wait my love.
+      </p>
+      <p>Sorry din ti ma araramid ko nga basol nukwa, sorry nu ma apapa ka, sorry nu ma paspasangit ka pero uray nu kasta haan nak ag birok sabali kasi sika latta pilyik sika ti kayat ko.
+        Dapat sika tu asawak ah 🤨🤨, dapat sika kadwak tumanda 🤨🤨 isu dapat ag adal ta nga nasayaat. Tas dapat awan ag birbirok sabali sitan habng buhay pala desisyon nak eh 🙄🙄 HAHAHA.
+        I love you always honey ko 😘😘 kayat kolang amom atuy saloobin ko isu inaramid ko atuy tano maiba mit haan na chat tsaka awan pai mabigay ko tatta 😔😔 isu galgalingak ag adalin tano mabigay ko tu lahat. 
+      </p>
+      <p>Yun lang naman mahal naybagak mit siguro amin na kayat ko ibagan HAHAHA madik ma express amin nga kayat ko ibaga pero mahal na mahal ka kasi sika first Gf ko ih tas nag healthy pay sarap sa feeling awanin ma bagakon
+        na pispis aminin sana haan ka mabanog nga mang awat tuy ugalik. I Love You So Much 😘😘 and thank you for being there for me.
+      </p>
+      
+
+        <p class="signature"></p>
+    </div>
+    <div class="nav-container">
+      <button class="nav-btn next-btn" onclick="showSecondPage()">Back</button>
+    </div>
+  </div>
+
+   
+<script>
+  function checkPassword() {
+    const input = document.getElementById('password').value;
+    const message = document.getElementById('message');
+    const loginBox = document.getElementById('loginBox');
+    const loveSite = document.getElementById('loveSite');
+
+    const correctPassword = "051825"; 
+
+    if (input === correctPassword) {
+      loginBox.style.display = "none";
+      loveSite.style.display = "flex";
+    } else {
+      message.textContent = "Incorrect password.";
+    }
+  }
+
+  function showSecondPage() {
+    document.getElementById('loveSite').style.display = "none";
+    document.getElementById('secondPage').style.display = "flex";
+    document.getElementById('thirdPage').style.display = "none";
+
+    const video = document.querySelector('#secondPage video');
+    if (video) {
+      video.play(); 
+    }
+  }
+
+  function showFirstPage() {
+    const video = document.querySelector('#secondPage video');
+    if (video) {
+      video.pause();          
+      video.currentTime = 0;
+    }
+    document.getElementById('secondPage').style.display = "none";
+    document.getElementById('loveSite').style.display = "flex";
+  }
+  function showthirdPage() {
+  const video = document.querySelector('#secondPage video');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
+  document.getElementById('secondPage').style.display = "none";
+  document.getElementById('thirdPage').style.display = "flex";
+}
+
+  function createHeart() {
+    const emojis = ['❤️','💖','💕','💓','💗','💙','🩵','🔵','💎'];
+    const heart = document.createElement('div');
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.top = '-30px';
+    heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }
+
+  setInterval(createHeart, 200);
+</script>
+</script>
+</body>
+</html>

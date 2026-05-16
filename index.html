@@ -258,25 +258,24 @@
     document.getElementById('thirdPage').style.display = "none";
 
     const video = document.querySelector('#secondPage video');
-    if (video) {
-      video.play(); 
+    if (iframe) {
+      iframe.play(); 
     }
   }
 
   function showFirstPage() {
-    const video = document.querySelector('#secondPage video');
-    if (video) {
-      video.pause();          
-      video.currentTime = 0;
-    }
-    document.getElementById('secondPage').style.display = "none";
-    document.getElementById('loveSite').style.display = "flex";
+     const iframe = document.querySelector('#secondPage iframe');
+  if (iframe) {
+    iframe.src = iframe.src;
   }
+  document.getElementById('secondPage').style.display = "none";
+  document.getElementById('loveSite').style.display = "flex";
+  }
+  
   function showthirdPage() {
-  const video = document.querySelector('#secondPage video');
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
+  const iframe = document.querySelector('#secondPage iframe');
+  if (iframe) {
+    iframe.src = iframe.src;
   }
   document.getElementById('secondPage').style.display = "none";
   document.getElementById('thirdPage').style.display = "flex";

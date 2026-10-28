@@ -1,304 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday</title>
-   <style>
-    * { box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For You 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff8fb8;--pink2:#ffc2d9;--rose:#e0568f;--ink:#6b3a52}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;background:linear-gradient(180deg,#6ec1f2,#9ad8fb 45%,#cdeeff) fixed}
+#sky{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.cloud{position:absolute;background:#fff;border-radius:100px;opacity:.85;will-change:transform;animation:drift linear infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:50%;height:160%;top:-70%;left:15%}
+.cloud::after{width:38%;height:130%;top:-45%;right:14%}
+@keyframes drift{to{transform:translateX(130vw)}}
+.float{position:absolute;bottom:-40px;will-change:transform;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.9}100%{transform:translateY(-115vh) rotate(40deg);opacity:0}}
+.twinkle{position:absolute;color:#fff;animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.6);opacity:.3}50%{transform:scale(1.2);opacity:1}}
 
-    body {
-  margin: 0;
-  font-family: "Georgia", serif;
-  background: linear-gradient(135deg, #ffe6f0, #ffccd5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+.screen{position:relative;min-height:100vh;display:none;align-items:center;justify-content:center;padding:24px}
+.screen.on{display:flex;animation:pop .7s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pop{from{opacity:0;transform:scale(.88) translateY(20px)}}
+.card{background:rgba(255,255,255,.88);border:3px solid #fff;border-radius:34px;padding:38px 34px;width:100%;max-width:460px;text-align:center;box-shadow:0 18px 50px rgba(224,86,143,.25),0 0 0 8px rgba(255,194,217,.35)}
+h1,h2{font-family:'Dancing Script',cursive;color:var(--rose);line-height:1.1}
+h1{font-size:3rem}h2{font-size:2.3rem}
+.sub{margin-top:10px;font-weight:500;opacity:.85}
+.emoji{font-size:3.4rem;display:inline-block;animation:beat 1.4s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
 
-}
+.pw{position:relative;margin:24px 0 8px}
+.pw input{width:100%;padding:16px 52px;border-radius:999px;border:3px solid var(--pink2);font:600 1.05rem 'Quicksand';color:var(--ink);text-align:center;letter-spacing:.15em;outline:none;transition:.25s}
+.pw input:focus{border-color:var(--pink);box-shadow:0 0 0 6px rgba(255,143,184,.25)}
+.pw button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:0;font-size:1.25rem;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;text-decoration:none;padding:14px 30px;border-radius:999px;font:700 1.05rem 'Quicksand';color:#fff;background:linear-gradient(135deg,#ff9cc2,#ff6fa5);box-shadow:0 8px 20px rgba(255,111,165,.4);transition:.2s}
+.btn:hover{transform:translateY(-3px) scale(1.04)}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn.soft{background:linear-gradient(135deg,#a8dcff,#6ec1f2);box-shadow:0 8px 20px rgba(110,193,242,.45)}
+.btn.ghost{background:#fff;color:var(--rose);border:3px solid var(--pink2);box-shadow:none}
+.msg{min-height:24px;margin-top:10px;font-weight:600;color:var(--rose)}
+.shake{animation:shake .5s}
+@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.menu{display:grid;gap:14px;margin-top:26px}
+.menu .btn{display:flex}
+#enterBtn{min-width:180px}
+#letterOk{min-width:140px}
+.hide{display:none!important}
 
-.heart {
-  position: fixed; 
-  color: red;
-  font-size: 24px;
-  animation: fall linear infinite;
-  pointer-events: none;
-}
-   @keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }}
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(110,193,242,.55)}
+.modal.open{display:flex;animation:fade .35s}
+@keyframes fade{from{opacity:0}}
+.box{width:100%;max-width:520px;animation:pop .55s cubic-bezier(.2,1.3,.4,1)}
+.paper{position:relative;background:repeating-linear-gradient(transparent 0 31px,rgba(255,143,184,.25) 31px 32px),#fffdf8;border:3px solid #fff;border-radius:26px;padding:28px 26px 22px;box-shadow:0 22px 60px rgba(224,86,143,.35),0 0 0 8px rgba(255,194,217,.45)}
+.paper::before{content:"💌";position:absolute;top:-26px;left:50%;transform:translateX(-50%);font-size:2.6rem}
+#letterBody{max-height:50vh;overflow-y:auto;padding:6px 8px 6px 4px;font:500 1.45rem/32px 'Caveat',cursive;color:#5b2f46}
+#letterBody p{margin-bottom:32px}
+#letterBody .sig{text-align:right;margin-top:-8px}
+#letterBody::-webkit-scrollbar{width:8px}
+#letterBody::-webkit-scrollbar-thumb{background:var(--pink2);border-radius:8px}
+.hint{font-size:.85rem;margin:12px 0 10px;opacity:.75;text-align:center;font-weight:600}
+.yn{display:flex;gap:16px;justify-content:center;align-items:center;margin-top:26px;min-height:70px;flex-wrap:wrap}
 
-    /* Login box */
-    .login-box {
-      background: #fff;
-      padding: 5%;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 90%;
-      max-width: 350px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      z-index: 10; /* keep above hearts */
-    }
-    input[type="password"], button {
-      width: 100%;
-      padding: 12px;
-      font-size: 1rem;
-    }
-    button {
-      background: #ff4fa3;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .message {
-      font-weight: bold;
-      color: red;
-      text-align: center;
-    }
-
-    /* Pages */
-    .page {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      min-height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: auto;
-      padding: 5%;
-      z-index: 10; /* keep above hearts */
-    }
-
-    .letter {
-      background: #fffdf8;
-      width: 95%;
-      max-width: 600px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      line-height: 1.6;
-      animation: fadeIn 2s ease;
-      font-size: 0.95rem;
-    }
-    p { color: #333; margin-bottom: 16px; }
-    .signature {
-      text-align: right;
-      font-style: italic;
-      color: #555;
-      margin-top: 30px;
-      font-family: "Cursive", serif;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-     @media (max-width: 500px) {
-  .vid iframe {
-    max-width: 100%;
-    aspect-ratio: 9/16;
-  }
-}
-
-    /* Buttons container */
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
-    }
-    .nav-btn {
-      padding: 10px 16px;
-      font-size: 0.9rem;
-      background: #ff4fa3;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .nav-btn {
-  flex: 1;                 
-  padding: 8px 12px;       
-  font-size: 0.9rem;        
-  background: #ff4fa3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  margin: 0 5px;            
-}
-
-.nav-container {
-  display: flex;
-  justify-content: center;  
-  width: 100%;
-  max-width: 600px;
-  margin-top: 20px;
-}
-
-    
-  </style>
-
+.book{background:linear-gradient(135deg,#ffd6e7,#ffc2d9);padding:14px;border-radius:30px;box-shadow:0 22px 60px rgba(224,86,143,.4)}
+.page{position:relative;min-height:330px;padding:26px 24px;border-radius:20px;border-left:10px double var(--pink2);background:repeating-linear-gradient(transparent 0 33px,rgba(110,193,242,.3) 33px 34px),#fffdfb}
+.page.flip{animation:flip .45s}
+@keyframes flip{from{opacity:0;transform:rotateY(35deg) translateX(30px)}}
+#dDate{font:600 1.7rem 'Dancing Script',cursive;color:var(--rose);padding-right:110px}
+#dMood{position:absolute;top:16px;right:64px;font-size:2rem;pointer-events:none}
+#dTitle{font-weight:700;margin:4px 0 12px}
+#dText{font:500 1.4rem/34px 'Caveat',cursive;color:#5b2f46;max-height:42vh;overflow-y:auto}
+.x{position:absolute;top:10px;right:12px;z-index:5;width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--pink2);font-size:1.1rem;cursor:pointer;color:var(--rose);transition:.2s}
+.x:hover{background:var(--pink2);transform:scale(1.1)}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.nav .btn{padding:10px 20px}
+.nav b{color:var(--rose)}
+#confetti{position:fixed;inset:0;z-index:100;pointer-events:none}
+</style>
 </head>
 <body>
+<div id="sky"></div>
+<canvas id="confetti"></canvas>
 
-  <!-- Login box -->
-  <div class="login-box" id="loginBox">
-    <h2 style="color: #ff4fa3;">What's the Password?</h2>
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkPassword()">Enter</button>
-    <div class="message" id="message"></div>
+<!-- LOGIN -->
+<section class="screen on" id="login">
+  <div class="card" id="loginCard">
+    <div class="emoji">🔐</div>
+    <h1>Hello, you</h1>
+    <p class="sub">This little place is just for you.<br>Enter the secret password 💗</p>
+    <div class="pw"><input type="password" id="pw" placeholder="• • • • • •" autocomplete="off" autofocus><button id="eye">👁️</button></div>
+    <p class="msg" id="loginMsg"></p>
+    <button class="btn" id="enterBtn">Open ✨</button>
+    <p class="sub" style="font-size:.85rem;margin-top:16px">Hint: Number</p>
   </div>
+</section>
 
+<!-- HOME -->
+<section class="screen" id="home">
+  <div class="card">
+    <div class="emoji">🌸</div>
+    <h1>Welcome, My Love</h1>
+    <p class="sub">I made this just for you.<br>What would you like to open? 💕</p>
+    <div class="menu">
+      <button class="btn ghost" id="openLetterBtn">💌 Read my letter again</button>
+      <button class="btn" id="openDiaryBtn">📖 My mini diary</button>
+      <a class="btn soft hide" id="homeLink" target="_blank" rel="noopener">💬 Message me here 💌</a>
+    </div>
+  </div>
+</section>
 
-  <div class="page" id="loveSite">
-    <div class="letter">
-  <p>Dear Honey,</p>
-  
-  <p>Happy Birthday, honey ko! Thank you for loving me and for always making me feel special. 
-     Your love gives me strength and happiness every single day, and I feel so lucky to have you in my life.</p>
-  
-  <p>Even though we are far apart, you still brighten my days just by being you. 
-     I promise to keep loving you, supporting you, and standing by you no matter the distance or the challenges we face.</p>
-  
-  <p>On your special day, I just want you to know how much you mean to me. 
-     You are my joy, my comfort, and my greatest blessing. I’ll always be grateful for you and the love we share.</p>
-  
-  <p>Enjoy your birthday, honey. Celebrate it fully, because you deserve all the happiness in the world. 
-     Here’s to more birthdays, more memories, and more years of love together.</p>
-  
-  <p>I LOVE YOU VERY, VERY MUCH :3</p>
-  
-  <p class="signature">— Mike Justine</p>
+<!-- LETTER -->
+<div class="modal" id="letterModal"><div class="box"><div class="paper">
+  <div id="letterBody">
+    <p>Hi love,</p>
+    <p>I don't really know where to begin, so I'll start with the truth: I miss you. Every single day, in the small moments, the little things that used to be ours.</p>
+    <p>I'm sorry for the times I hurt you, for the words I should have said sooner, and for the things I should have never said at all. You deserved patience and I gave you excuses.</p>
+    <p>While we were apart I did a lot of thinking, and a lot of growing. I'm learning to listen better, to love louder, and to be the person you always believed I could be.</p>
+    <p>I'm not asking you to forget what happened. I'm only asking for a chance to show you, with actions and not just words, that I've changed.</p>
+    <p>You are the best thing that ever happened to me, and I'd like to spend my days proving it.</p>
+    <p>Always yours,</p>
+    <p class="sig">— Mike 💗</p>
+  </div>
+  <p class="hint" id="letterHint"></p>
+  <div style="text-align:center"><button class="btn" id="letterOk">OK 💞</button></div>
+</div></div></div>
+
+<!-- QUESTION -->
+<div class="modal" id="askModal"><div class="box"><div class="card" style="max-width:none">
+  <div class="emoji">🥺</div>
+  <h2>Can we start again?</h2>
+  <p class="sub" style="font-size:1.15rem">I promise I'll be better.</p>
+  <div class="yn"><button class="btn" id="yesBtn">Yes 💖</button><button class="btn ghost" id="noBtn">No</button></div>
+  <p class="msg" id="askMsg"></p>
+</div></div></div>
+
+<!-- CELEBRATION: change the href below to your account -->
+<div class="modal" id="yayModal"><div class="box"><div class="card" style="max-width:none">
+  <div style="font-size:2rem;letter-spacing:6px">🎉💖✨💖🎉</div>
+  <h2 style="font-size:2.6rem">She said YES!</h2>
+  <p class="sub" style="font-size:1.1rem">You just made me the happiest person alive. 🥹<br>Come find me, love 💕</p>
+  <div class="menu">
+    <a class="btn" id="acct" href="https://www.facebook.com/messages" target="_blank" rel="noopener">Message me here 💌</a>
+    <button class="btn ghost" id="yayContinue">Continue to my little world 🌷</button>
+  </div>
+</div></div></div>
+
+<!-- DIARY: add or edit entries here -->
+<div id="entries" class="hide">
+  <i data-date="Day 1" data-mood="😢" data-title="The quiet started">I kept reaching for my phone to text you, then remembering I couldn't. The house felt too quiet. I just stared at our old photos for a while.</i>
+  <i data-date="Day 3" data-mood="📝" data-title="Writing it all down">I wrote down everything I did wrong. Not to blame myself, but to understand. It hurt, but it helped.</i>
+  <i data-date="Day 7" data-mood="🌱" data-title="Working on me">Started going for walks every morning. Cleared my head. Thought about how I want to treat the people I love.</i>
+  <i data-date="Day 12" data-mood="🎧" data-title="Our songs">Played our playlist on the way home. I smiled, then cried, then smiled again. You are in every song.</i>
+  <i data-date="Day 20" data-mood="🌸" data-title="Small changes">I'm more patient now. I catch myself before I say something I'll regret. I wish you could see it.</i>
+  <i data-date="Day 30" data-mood="💖" data-title="Still choosing you">A whole month. Nothing changed how I feel. If anything, I know now just how much you mean to me.</i>
 </div>
 
-    <div class="nav-container">
-      <button class="nav-btn next-btn" onclick="showSecondPage()">Next</button>
-    </div>
+<div class="modal" id="diaryModal"><div class="box"><div class="book">
+  <div class="page" id="page">
+    <button class="x" id="diaryClose">✖</button>
+    <div id="dDate"></div><div id="dMood"></div><div id="dTitle"></div><div id="dText"></div>
   </div>
+  <div class="nav"><button class="btn" id="prev">◀</button><b id="dCount"></b><button class="btn" id="next">▶</button></div>
+</div></div></div>
 
-
-<div class="page" id="secondPage">
-  <div class="vid" style="display:flex; justify-content:center; align-items:center; width:100%; height:100vh;">
-    <iframe src="https://drive.google.com/file/d/1b2F_JZuimPQT8fkYOaxr8oiTdonXBedI/preview"
-            style="width:100%; max-width:400px; aspect-ratio:9/16; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
-    </iframe>
-  </div>
-  <div class="nav-container">
-    <button class="nav-btn" onclick="showFirstPage()">Back</button>
-    <button class="nav-btn next-btn" onclick="showthirdPage()">Next</button>
-  </div>
-</div>
-  
-   
-
- <div class="page" id="thirdPage">
-    <div class="letter">
-      <p>Ganda ng vid HAHAHA pinag isipak na permi ajay eh with all of my heart.
-        Madik amo ibagak hon pero Happy birthday po, masaya nak tatta HAHAHA isu dapat masaya ka din kasi it's your birthday baby 😘😏
-      </p>
-      <p>Tapos 3 days nalang first anniversary tan 🥹🥹 akalak idi baka haan ta tumagal kasi nag galas ugalik pero look at us tayo parin hanngang ngayon😍😍.
-        Thank you kasi uray pangit may pakpakitak kanyam na ugali ag sstay ka latta very thankful nak kin lord kasi inikan nak ti babae nga ag stay kanyak and tangap nak nu ana nak.
-        Isu haan ko kayat ag birok sabali kasi awan katulad mo walang katulad ba I'm so lucky to have you in my life uray agka layo ta i'm willing to wait my love.
-      </p>
-      <p>Sorry din ti ma araramid ko nga basol nukwa, sorry nu ma apapa ka, sorry nu ma paspasangit ka pero uray nu kasta haan nak ag birok sabali kasi sika latta pilyik sika ti kayat ko.
-        Dapat sika tu asawak ah 🤨🤨, dapat sika kadwak tumanda 🤨🤨 isu dapat ag adal ta nga nasayaat. Tas dapat awan ag birbirok sabali sitan habng buhay pala desisyon nak eh 🙄🙄 HAHAHA.
-        I love you always honey ko 😘😘 kayat kolang amom atuy saloobin ko isu inaramid ko atuy tano maiba mit haan na chat tsaka awan pai mabigay ko tatta 😔😔 isu galgalingak ag adalin tano mabigay ko tu lahat. 
-      </p>
-      <p>Yun lang naman mahal naybagak mit siguro amin na kayat ko ibagan HAHAHA madik ma express amin nga kayat ko ibaga pero mahal na mahal ka kasi sika first Gf ko ih tas nag healthy pay sarap sa feeling awanin ma bagakon
-        na pispis aminin sana haan ka mabanog nga mang awat tuy ugalik. I Love You So Much 😘😘 and thank you for being there for me.
-      </p>
-      
-
-        <p class="signature"></p>
-    </div>
-    <div class="nav-container">
-      <button class="nav-btn next-btn" onclick="showSecondPage()">Back</button>
-    </div>
-  </div>
-
-   
 <script>
-  function checkPassword() {
-    const input = document.getElementById('password').value;
-    const message = document.getElementById('message');
-    const loginBox = document.getElementById('loginBox');
-    const loveSite = document.getElementById('loveSite');
+const PASSWORD="051825";
+const $=id=>document.getElementById(id), open=id=>$(id).classList.add('open'), close=id=>$(id).classList.remove('open');
+const rnd=n=>Math.random()*n;
 
-    const correctPassword = "051825"; 
+/* sky */
+const mk=(cls,txt,css)=>{const d=document.createElement('div');d.className=cls;d.textContent=txt;d.style.cssText=css;$('sky').append(d)};
+for(let i=0;i<7;i++){const w=90+rnd(130);mk('cloud','',`width:${w}px;height:${w*.32}px;top:${rnd(70)}%;left:-30vw;animation-duration:${60+rnd(70)}s;animation-delay:-${rnd(100)}s`)}
+for(let i=0;i<14;i++)mk('float','💗🌸🩷✨🎀🦋💕🌷'.match(/./gu)[i%8],`left:${rnd(100)}%;font-size:${14+rnd(22)}px;animation-duration:${9+rnd(12)}s;animation-delay:-${rnd(20)}s`);
+for(let i=0;i<18;i++)mk('twinkle','✦',`left:${rnd(100)}%;top:${rnd(100)}%;font-size:${10+rnd(14)}px;animation-delay:${rnd(3)}s`);
 
-    if (input === correctPassword) {
-      loginBox.style.display = "none";
-      loveSite.style.display = "flex";
-    } else {
-      message.textContent = "Incorrect password.";
-    }
-  }
-
-  function showSecondPage() {
-    document.getElementById('loveSite').style.display = "none";
-    document.getElementById('secondPage').style.display = "flex";
-    document.getElementById('thirdPage').style.display = "none";
-
-    const video = document.querySelector('#secondPage video');
-    if (iframe) {
-      iframe.play(); 
-    }
-  }
-
-  function showFirstPage() {
-     const iframe = document.querySelector('#secondPage iframe');
-  if (iframe) {
-    iframe.src = iframe.src;
-  }
-  document.getElementById('secondPage').style.display = "none";
-  document.getElementById('loveSite').style.display = "flex";
-  }
-  
-  function showthirdPage() {
-  const iframe = document.querySelector('#secondPage iframe');
-  if (iframe) {
-    iframe.src = iframe.src;
-  }
-  document.getElementById('secondPage').style.display = "none";
-  document.getElementById('thirdPage').style.display = "flex";
+/* confetti */
+const cv=$('confetti'),cx=cv.getContext('2d');let parts=[],running=false;
+const fit=()=>{cv.width=innerWidth;cv.height=innerHeight};addEventListener('resize',fit);fit();
+const heart=document.createElement('canvas');heart.width=heart.height=48;
+{const h=heart.getContext('2d');h.font='36px serif';h.textAlign='center';h.textBaseline='middle';h.fillText('💗',24,26)}
+function burst(n=90){
+  const cols=['#ff8fb8','#ffc2d9','#fff','#7ec8f5','#ffd86b','#e0568f'];
+  for(let i=0;i<n;i++)parts.push({x:innerWidth/2+rnd(200)-100,y:innerHeight*.55,vx:rnd(16)-8,vy:-rnd(18)-6,r:4+rnd(7),c:cols[i%6],rot:rnd(6),vr:rnd(.4)-.2,h:Math.random()<.4,life:200+rnd(80)});
+  if(!running){running=true;requestAnimationFrame(tick)}
 }
-
-  function createHeart() {
-    const emojis = ['❤️','💖','💕','💓','💗','💙','🩵','🔵','💎'];
-    const heart = document.createElement('div');
-    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    heart.classList.add('heart');
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.top = '-30px';
-    heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 5000);
+function tick(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts=parts.filter(p=>p.life>0&&p.y<cv.height+40);
+  for(const p of parts){
+    p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.rot+=p.vr;p.life--;
+    cx.save();cx.translate(p.x,p.y);cx.rotate(p.rot);cx.fillStyle=p.c;cx.globalAlpha=Math.min(1,p.life/60);
+    if(p.h){const s=p.r*3;cx.drawImage(heart,-s/2,-s/2,s,s)}else cx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.6);
+    cx.restore();
   }
+  parts.length?requestAnimationFrame(tick):running=false;
+}
+const celebrate=()=>{burst();setTimeout(()=>burst(70),500)};
 
-  setInterval(createHeart, 200);
-</script>
+/* login */
+$('eye').onclick=()=>$('pw').type=$('pw').type==='password'?'text':'password';
+function tryLogin(){
+  if($('pw').value===PASSWORD){
+    celebrate();$('login').classList.remove('on');$('home').classList.add('on');setTimeout(openLetter,700);
+  }else{
+    const c=$('loginCard');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');
+    $('loginMsg').textContent="Hmm, that's not it 😅 try again";$('pw').select();
+  }
+}
+$('enterBtn').onclick=tryLogin;
+$('pw').addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin()});
+
+/* letter */
+let first=true;
+function checkRead(){
+  const b=$('letterBody');
+  if(b.scrollTop+b.clientHeight>=b.scrollHeight-12){$('letterOk').disabled=false;$('letterHint').textContent='Thank you for reading 🥹'}
+}
+function openLetter(){
+  open('letterModal');$('letterBody').scrollTop=0;$('letterOk').disabled=true;
+  $('letterHint').textContent='Scroll down and read it all, love 💗';setTimeout(checkRead,100);
+}
+$('letterBody').onscroll=checkRead;
+$('openLetterBtn').onclick=openLetter;
+$('letterOk').onclick=()=>{close('letterModal');if(first){first=false;setTimeout(()=>open('askModal'),500)}};
+
+/* question */
+const noLines=["Are you sure? 🥺","Please? 🥹","I'll be so good, I promise 💗","Pretty please with a cherry on top 🍒","I'll bring you flowers 🌷","Just one more chance… 🙏","Okay, you can't say no anymore 😤💖"];
+let nos=0;
+function yes(){
+  close('askModal');
+  $('homeLink').href=$('acct').href;$('homeLink').classList.remove('hide');
+  open('yayModal');celebrate();setTimeout(celebrate,1200);
+}
+$('yesBtn').onclick=yes;
+$('noBtn').onclick=()=>{
+  $('askMsg').textContent=noLines[Math.min(nos,noLines.length-1)];nos++;
+  $('yesBtn').style.transform=`scale(${1+nos*.18})`;$('yesBtn').style.margin=`0 ${nos*6}px`;
+  $('noBtn').style.transform=`scale(${Math.max(.45,1-nos*.1)})`;
+  if(nos>=noLines.length){$('noBtn').textContent='Yes 💖';$('noBtn').onclick=yes}
+};
+$('yayContinue').onclick=()=>close('yayModal');
+
+/* diary */
+const pages=[...$('entries').children];let pg=0;
+function show(flip){
+  const e=pages[pg].dataset;
+  $('dDate').textContent=e.date;$('dMood').textContent=e.mood;$('dTitle').textContent=e.title;$('dText').textContent=pages[pg].textContent;
+  $('dCount').textContent=`${pg+1} / ${pages.length}`;$('prev').disabled=!pg;$('next').disabled=pg===pages.length-1;
+  if(flip){$('page').classList.remove('flip');void $('page').offsetWidth;$('page').classList.add('flip')}
+}
+$('openDiaryBtn').onclick=()=>{pg=0;show();open('diaryModal')};
+$('prev').onclick=()=>{pg--;show(1)};
+$('next').onclick=()=>{pg++;show(1)};
+$('diaryClose').onclick=()=>close('diaryModal');
 </script>
 </body>
 </html>
